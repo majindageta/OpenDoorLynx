@@ -57,30 +57,20 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
         ComponentName thisWidget = new ComponentName(context, SimpleWidgetProvider.class);
         remoteViews.setViewVisibility(R.id.main_progress_bar_widget, View.VISIBLE);
 
-// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
                         callIntent(context, response);
 
                         Registry.getInstance().setButtonEnabled(false);
-
-                        final Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                callIntent(context, "!");
-                                Registry.getInstance().setButtonEnabled(true);
-                            }
-                        },4000);
-
+                        callHandler(context);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 callIntent(context, "KO");
+                callHandler(context);
             }
         });
         queue.add(stringRequest);
@@ -103,6 +93,17 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
 
+    }
+
+    private void callHandler(final Context context) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callIntent(context, "!");
+                Registry.getInstance().setButtonEnabled(true);
+            }
+        },4000);
     }
 
 }
