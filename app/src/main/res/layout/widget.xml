@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="@android:color/transparent">
+
+
+    <ImageButton
+        android:id="@+id/actionButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/open"
+        android:scaleType="fitCenter"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:text=""/>
+
+    <ProgressBar
+        android:id="@+id/main_progress_bar_widget"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/actionButton"
+        android:layout_alignBottom="@id/actionButton"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
